@@ -1,0 +1,112 @@
+body{margin:0;height:100%;}
+canvas{
+    position:absolute;top:0;left:0
+    background-image: linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+    background-image: -o-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+    background-image: -moz-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+    background-image: -webkit-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+    background-image: -ms-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+    
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(105,173,212)),
+        color-stop(0.84, rgb(23,82,145))
+    );
+}
+
+.btn_container {
+  	position:absolute;
+  	top:40%;
+  	left:0;
+    width: 100%;
+    height: 60%;
+}
+
+h1 {
+  font-size: 80px;
+  background: -webkit-linear-gradient(#add8e6 , #00008b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h5 {
+  color: #1E90FF;
+  text-decoration: underline #1E90FF;
+}
+
+.back_color {
+  background-color: powderblue;
+}
+
+.display-4{ 
+  text-align:center;
+  font-family: Marker Felt, fantasy;
+}
+
+.lead{
+  text-align:center;
+}
+
+.btn{
+  font-family:American Typewriter, serif;
+}
+
+.btn-primary{
+  color:white;
+}
+
+.btn-outline-dark {
+  border: black solid 1px;
+}
+
+.leftButton { 
+	position:relative;
+ }
+
+ .rightButton {
+ 	position:relative;
+	margin-left:20px;
+ }
+
+ .row{
+ 	padding:10px;
+ 	margin-bottom:20px;
+ }
+
+.getRecipeBtn{ 
+  margin-bottom: 100px;
+}
+
+#intol_select, #type_select {
+  border: gray solid 1px;
+}
+
+input {
+  border: gray solid 1px;
+  border-radius: 3px;
+}
+
+label {
+	font-weight: bold;
+}
+
+
+.custom-card:hover {
+  color: inherit;
+}
+
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#dropdownMenuButton {
+  background-color: white; 
+}
+
+
+

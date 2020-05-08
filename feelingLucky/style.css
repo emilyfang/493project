@@ -1,0 +1,43 @@
+.card-img-class {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back_color{
+  background-color: powderblue;
+}
+
+#seeMore {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1 {
+  font-size: 80px;
+  background: -webkit-linear-gradient(#add8e6 , #00008b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.display-4{ 
+  text-align:center;
+  font-family: Marker Felt, fantasy;
+}
+
+.lead{
+  text-align:center;
+}
+
+.btn{
+  font-family:American Typewriter, serif;
+}
+
+.center{
+  text-align:center;
+}

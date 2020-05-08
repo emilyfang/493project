@@ -1,0 +1,197 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+  	<title>Search Recipe</title>
+    <!-- 	Bootstrap -->
+    <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
+    <!--  Bootstrap 4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    
+    <!-- popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+
+
+      <script src=" https://unpkg.com/vuex@3.1.3/dist/vuex.js"></script>
+
+
+
+
+
+
+  </head>
+  <body class="back_color">
+    <div id = 'sapp'>
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Foodle</h1>
+          <p class="lead">A <i>quick</i> and <i>easy</i> way to make recipe decisions at home.</p>
+          <div class="text-center">
+            <button class="btn btn-primary" v-on:click="goHome">Start Over</button>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="app-search">
+    
+     <div class="container"> 
+      <h4>Feel free to specify as many options as you would like or none at all!</h3>
+
+      <div class="row" id="row1">
+        <div class="col">
+          <label for="include_input">Include Ingredient</label>
+          <div id="includeIngredients">
+            <input id="include_input" v-model="info.includeIngredients" placeholder="(ie. potato)">
+          </div>
+
+        </div>
+
+
+        <div class="col">
+             <label for="exclude_input">Exclude Ingredient</label>
+          <div id="excludeIngredients">
+         
+            <input id="exclude_input" v-model="info.excludeIngredients" placeholder="(ie. tomato)">
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <div class="row" id="row2">
+        <div class="col">
+          <div id='type_options'>
+
+            <label for="type_select">Food Category</label>
+            <select v-model="info.type" id="type_select" class="form-control" multiple="multiple" data-live-search="true">
+
+              <option v-for="type in type_options" v-bind:value="type">
+                {{ type }}
+              </option>
+            </select>
+
+          </div>
+        </div>
+
+
+        <div class="col">
+          <div id='intolerances'>
+
+<!--             <label for="intol_select">Does Not Contain</label>
+            <div id="intol_select" v-for="intol in intol_options">
+              <input type="checkbox" :value="intol" v-model="info.intolerances"> -->
+              <!-- <label :for="intol">{{intol}}</label> -->
+<!--               {{intol}}
+            </div>
+            <span>intolerances: {{ info.intolerances }}</span> -->
+
+
+
+
+                <label for="intol_select">Dietary Restriction</label>
+            <select v-model="info.intolerances" id="intol_select" class="form-control" multiple="multiple" data-live-search="true">
+
+              <option v-for="intol in intol_options" v-bind:value="intol">
+                {{ intol }}
+              </option>
+            </select>
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row" id="row3">
+        <div class="col">
+          <label for="difficulty_setting">Difficulty</label>
+        <div id="difficulty_setting"><!-- 
+          we will just sort results by time either ascending or descending -->
+
+          <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{info.difficulty}}
+            </button>
+
+
+
+
+            <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
+              <a @click="selected_diff('N/A')" class="dropdown-item">N/A</a>
+              <a @click="selected_diff('Easy')" class="dropdown-item">Easy</a>
+              <a @click="selected_diff('Medium')" class="dropdown-item">Medium</a>
+              <a @click="selected_diff('Hard')" class="dropdown-item">Hard</a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="col">
+          <div id='cooking_time'> 
+
+
+            <label for="cookTime_input">Max Cooking Time</label>
+
+            <input  id="cookTime_input" type="number" v-model="info.maxReadyTime" placeholder="minutes">
+            <br>
+            <label style="margin-top:10px" for="maxCalories_input">Calorie Limitation</label>
+
+            <input id="maxCalories_input" type="number" v-model="info.maxCalories" placeholder="max allowed calories">
+          </div>
+
+
+        </div>
+    </div>
+    <br>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary btn-lg getRecipeBtn" @click="showResultPage">Get Recipe</button>
+      </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		  <!-- 	Bootstrap -->
+	   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+	      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="style.css">
+
+      	  <!-- jquery -->
+	  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd"  crossorigin="anonymous"></script>
+
+          <!-- vue -->
+      <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+</head>
+<body class="back_color">
+
+<div id='detailsPage'>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Foodle</h1>
+      <p class="lead">A <i>quick</i> and <i>easy</i> way to make recipe decisions at home.</p>
+      <div class="center">
+        <button class="btn btn-primary" v-on:click="goHome">Start Over</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="width:90%">
+    <img class="card-img-class" v-bind:src="result.image" alt="Card image">
+    <div class="card-body">
+      <br>
+      <h4 class="card-title"><b>{{ result.title }}</b></h4><br>
+      <p class="card-subtitle mb-2 "><b>Source:</b> {{ result.sourceName }}, <a v-bind:href="result.spoonacularSourceUrl">Source URL</a></p>
+      <p class="card-subtitle mb-2 "><b>Cooking Time:</b> {{ result.readyInMinutes }} minutes</p>
+      <p class="card-subtitle mb-2"><b>Servings:</b> {{ result.servings }}</p>
+      <p class="card-subtitle mb-2"><b>Categories:</b> {{ result.dishTypes.join(', ' ) }} {{ result.cuisines.join(', ') }}</p>
+      <br>
+      <h5 class="card-subtitle"><strong>Ingredient List:</strong></h5>
+
+      <div v-for="ingredient in result.extendedIngredients">
+      <input type = "checkbox"> {{ingredient.amount}} {{ ingredient.unit}} {{ ingredient.name }}
+      </div>
+     
+      <!-- <ul>
+        <li v-for="ingredient in result.extendedIngredients">
+          {{ingredient.amount}} {{ingredient.unit}} {{ ingredient.name }}
+        </li>
+      </ul> -->
+      <br>
+      <h5 class="card-subtitle"><strong>Instructions:</strong> </h5>
+      <p class="card-text" v-html="result.instructions"></p>
+    </div>
+    <h><strong>Cooking Timer:</strong></h>
+    <timer-setup v-if="!time" @set-time="setTime"></timer-setup>
+	  <div v-else>
+		 <timer :time="prettyTime"></timer>
+		 <div>
+			  <button v-if="!isRunning" @click="start">Start</button>
+			  <button v-if="isRunning" @click="stop">Stop</button>
+			  <button @click="reset">Reset</button>
+		 </div>
+	  </div>
+    <br>
+    <a @click="launchYoutube" class="btn btn-primary">I want to cook with a video of a similar recipe!</a>
+  </div>
+	
+
+</div>
+
+ <script src="script.js"></script>
+</body>
+</html>

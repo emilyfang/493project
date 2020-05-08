@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!--  Bootstrap 4-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="style.css">
+
+
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<!-- popper.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+	<!-- vue -->
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+
+
+
+</head>
+<body class="back_color">
+	<div id = 'rapp'>
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-4">Foodle</h1>
+				<p class="lead">A <i>quick</i> and <i>easy</i> way to make recipe decisions at home.</p>
+				<div class="text-center">
+					<button class="btn btn-primary" v-on:click="goHome">Start Over</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="app-results">
+		<div v-if="readyState">
+			<img src="loading.gif" alt="Loading results" class="center">
+		</div>
+		<div v-else> 
+			Showing <b>{{numShowingResults}}</b> of <b>{{totalNumResults}}</b> results
+
+			<div v-for="(result, index) in results"> 
+
+				<!-- Card stuff -->
+				<a type="button" @click="gotoRecipe(recipeData[index])" class="custom-card">
+					<div class="card ">
+						<div class="row no-gutters">
+							<div class="col-md-4">
+								<img :src="result.image" class="card-img" alt="...">
+								<!-- text here fits under the image -->
+								<div id="text-under-image">
+									<p>
+										<b>Serving Size: </b> {{recipeData[index].servings}}
+									</p>	
+									<p>
+										<b>Cook Time: </b> {{recipeData[index].readyInMinutes}} minutes
+									</p>
+									<br>
+								</div>
+
+
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">{{result.title}}</h5>
+									<span class="card-text" v-html="recipeData[index].summary.slice(0,194)"></span><span>.......</span>
+								</div>
+
+
+								<div class="card-footer">
+									<p class="card-text"><small class="text-muted">				
+										<b> Ingredient List: </b>
+										<p style="display:inline-block" v-for="ingredient in recipeData[index].extendedIngredients">
+											<!-- {{ingredient.amount}} {{ingredient.unit}}  -->
+											{{ingredient.name}},&nbsp;
+										</p>
+									</small></p>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</a>
+
+
+
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+
+	<script src="results.js"></script>
+
+</body>
+</html>

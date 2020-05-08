@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		  <!-- 	Bootstrap -->
+	   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+	      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="style.css">
+
+      	  <!-- jquery -->
+	  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd"  crossorigin="anonymous"></script>
+
+          <!-- vue -->
+      <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+</head>
+<body class="back_color">
+
+<div id='feelingLucky'>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Foodle</h1>
+      <p class="lead">A <i>quick</i> and <i>easy</i> way to make recipe decisions at home.</p>
+      <div class="center">
+        <button class="btn btn-primary" v-on:click="goHome">Start Over</button>
+        <button class="btn btn-primary" v-on:click="reroll">I want another one!</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="width:90%">
+    <img class="card-img-class" v-bind:src="randomRecipe.image" alt="Card image">
+    <div class="card-body">
+      <br>
+      <h4 class="card-title">{{ randomRecipe.title }}</h4>
+      <p class="card-text" v-html="randomRecipe.summary"></p>
+      <a id="seeMore" v-on:click="fullDetails" class="btn btn-primary">See More Details</a>
+    </div>
+  </div>
+  
+
+</div>
+
+
+
+
+
+
+
+
+ <script src="script.js"></script>
+</body>
+</html>
